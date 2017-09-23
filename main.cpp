@@ -9,10 +9,7 @@ using namespace std;
 //    for
 //}
 
-void newfunc()
-{
-//    null
-}
+int brandnewfunc();
 
 int main()
 {
