@@ -1,6 +1,11 @@
 #include <iostream>
 #include <fstream>
 
+int fromice()
+{
+}
+
+
 using namespace std;
 
 //bitset<64> charToBits(const char pt[8])
