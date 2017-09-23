@@ -4,6 +4,7 @@
 using namespace std;
 
 // This is from a testing branch
+// You can do whatever you want but later you can change it.
 
 //bitset<64> charToBits(const char pt[8])
 //{
