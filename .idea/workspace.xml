@@ -11,7 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="061e7e32-fda9-40a8-a2ee-125f350e8fe3" name="Default" comment="null func">
+    <list default="true" id="061e7e32-fda9-40a8-a2ee-125f350e8fe3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -27,8 +27,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+            <state relative-caret-position="294">
+              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -62,7 +62,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="test" />
+        <entry key="$PROJECT_DIR$" value="roshan" />
       </map>
     </option>
   </component>
@@ -163,10 +163,32 @@
       <workItem from="1506151301529" duration="922000" />
       <workItem from="1506152247103" duration="1143000" />
     </task>
+    <task id="LOCAL-00001" summary="brand new func">
+      <created>1506201115000</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1506201115000</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test description">
+      <created>1506201252971</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1506201252971</updated>
+    </task>
+    <task id="LOCAL-00003" summary="void description">
+      <created>1506201279489</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1506201279489</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2365000" />
+    <option name="totallyTimeSpent" value="2856000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -214,7 +236,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="testing" />
     <MESSAGE value="null func" />
-    <option name="LAST_COMMIT_MESSAGE" value="null func" />
+    <MESSAGE value="brand new func" />
+    <MESSAGE value="test description" />
+    <MESSAGE value="void description" />
+    <option name="LAST_COMMIT_MESSAGE" value="void description" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -560,8 +585,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="9" lean-forward="true" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+        <state relative-caret-position="294">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
