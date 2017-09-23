@@ -5,6 +5,9 @@ int fromice()
 {
 }
 
+void fromapollo()
+{
+}
 
 using namespace std;
 
@@ -13,16 +16,6 @@ using namespace std;
 //    bitset<64>;
 //    for
 //}
-
-int brandnewfunc()
-{
-//     description
-}
-
-void fromapollo()
-{
-}
-
 
 int main()
 {
