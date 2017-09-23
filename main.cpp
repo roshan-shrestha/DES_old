@@ -9,7 +9,10 @@ using namespace std;
 //    for
 //}
 
-int brandnewfunc();
+int brandnewfunc()
+{
+//     description
+}
 
 int main()
 {
