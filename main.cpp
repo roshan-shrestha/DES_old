@@ -19,6 +19,11 @@ int brandnewfunc()
 //     description
 }
 
+void fromapollo()
+{
+}
+
+
 int main()
 {
     string read, write, key;
