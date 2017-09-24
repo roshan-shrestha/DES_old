@@ -1,4 +1,4 @@
-# Install script for directory: /Users/Roshan/github/DES
+# Install script for directory: /Users/nischalstha/Desktop/DES
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/Roshan/github/DES/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/nischalstha/Desktop/DES/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

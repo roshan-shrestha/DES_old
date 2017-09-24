@@ -5,12 +5,6 @@
 
 using namespace std;
 
-//bitset<64> charToBits(const char pt[8])
-//{
-//    bitset<64>;
-//    for
-//}
-
 int main()
 {
     string read, write, key;
