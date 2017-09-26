@@ -30,6 +30,8 @@ const vector<int> p32 = {
 static vector<int> exp_table = {32,1,2,3,4,5,4,5,6,7,8,9,8,9,10,11,12,13,12,13,14,15,16,
              17,16,17,18,19,20,21,20,21,22,23,24,25,24,25,26,27,28,29,28,29,30,31,32,1};
 
+static vector<int> left_shift_schedule = {1, 1, 2, 2, 2, 2, 2, 2};
+
 string padtext(string read)
 {
     int length = read.length();
@@ -190,10 +192,49 @@ string perm(string eight_binary)
 //    }
 //}
 
-string encrypt(string left, string right)
+
+string expansion(string &exp)
 {
-    return "poop";
+    string change;
+    int count = 0;
+
+    for (int i = 0; i < exp.length(); i+=4)
+    {
+        if (count != 0)
+        {
+            change += exp[count-1];
+        }
+        change += exp.substr(count, 4);
+
+        count += 4;
+
+        if (count != 32)
+        {
+            change += exp[count];
+        }
+        change += "";
+    }
+
+    change += exp[0];
+    exp = change;
+    return exp;
 }
+
+//string encrypt(string left, string right)
+//{
+//    expansion(right);
+//}
+
+//int main(){
+//
+//
+//    string bin = "11110000101010101111000010101010";
+//    cout << bin << endl;
+//    expansion(bin);
+//    cout << endl;
+//    cout << bin << endl; //string passed in expansion function
+//    return 0;
+//}
 
 int main()
 {
@@ -243,14 +284,19 @@ int main()
 
         cout << left_binary << " " << right_binary<< endl;
 
-        if (i == 0)
-        {
-            result[i] = encrypt(left_permuted_vector[i],right_permuted_vector[i]);
-        }
-        else
-        {
-            result[i] = encrypt(right_permuted_vector[i-1], ( bitset<32>(left_permuted_vector[i-1] ) ^ bitset<32>(result[i-1])).to_string() );
-        }
+        string expanded = expansion(right_binary);
+
+        cout << expanded << endl;
+
+//        if (i == 0)
+//        {
+//            //result[i] = encrypt(left_permuted_vector[i],right_permuted_vector[i]);
+//
+//        }
+//        else
+//        {
+//           // result[i] = encrypt(right_permuted_vector[i-1], ( bitset<32>(left_permuted_vector[i-1] ) ^ bitset<32>(result[i-1])).to_string() );
+//        }
 
     }
 
