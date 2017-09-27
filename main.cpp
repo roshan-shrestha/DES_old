@@ -273,12 +273,6 @@ int main()
 
     cout << final_key << endl;
 
-//    // 8 rounds of encryption has different key scheduling.
-//    for (int i = 0 ; i < left_shift_schedule.size() ; i++)
-//    {
-//
-//    }
-
     for (int i = 0; i < permuted_vector.size() ; i++)
     {
         //Split the vector into two 32 bit binary
