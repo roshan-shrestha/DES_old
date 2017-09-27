@@ -27,8 +27,13 @@ const vector<int> p32 = {
                 22, 11,  4, 25
              };
 
-static vector<int> exp_table = {32,1,2,3,4,5,4,5,6,7,8,9,8,9,10,11,12,13,12,13,14,15,16,
-             17,16,17,18,19,20,21,20,21,22,23,24,25,24,25,26,27,28,29,28,29,30,31,32,1};
+static vector<int> exp_table = {32,1,2,3,4,5,4,5,
+                                6,7,8,9,8,9,10,11,
+                                12,13,12,13,14,15,
+                                16,17,16,17,18,19,
+                                20,21,20,21,22,23,
+                                24,25,24,25,26,27,
+                                28,29,28,29,30,31,32,1};
 
 static vector<int> left_shift_schedule = {1, 1, 2, 2, 2, 2, 2, 2};
 
@@ -100,6 +105,7 @@ string perm(string eight_binary)
     return ip_binary;
 }
 
+//Permutation choice one
 string key_perm_one(string eight_key)
 {
     string perm_one_binary;
@@ -112,108 +118,7 @@ string key_perm_one(string eight_key)
     return perm_one_binary;
 }
 
-// Mode = 1 for string
-// Mode = 2 for key
-//void tempfunction(string read, int mode)
-//{
-//    int count = 0;
-//    int ascii;
-//
-//    string binary;
-//    string eight_binary;
-//    string ip_binary;
-//
-//    string left_binary;
-//    string right_binary;
-//
-//    string left_key_binary, right_key_binary;
-//
-//    if (mode == 1)
-//    {
-//        //Create a vector of characters that splits the string into each character.
-//        //String refers to 'read'.
-//        vector<char> split_array(read.begin(),read.end());
-//
-//        // Access each character in the string ( each char can be accessed by *i)
-//        for (vector<char>::const_iterator i = split_array.begin(); i != split_array.end(); ++i)
-//        {
-//            // A int count variable to track the count of characters
-//            count++;
-//
-//            //Converts each character into ASCII value
-//            ascii = int(*i);
-//
-//            //Convert ASCI value to eight bit binary.
-//            binary = bitset<8>(ascii).to_string();
-//
-//            if (mode == 1)
-//            {
-//                //Concatenate eight characters to make 64 bit (1 char = 8 bit)
-//                eight_binary += binary;
-//                //Concatenate until 8th character.
-//
-//                if ((count % 8) == 0)
-//                {
-//                    //Initial permutation of the concatenated binary
-//                    for (int j = 0 ; j < eight_binary.length(); j++)
-//                    {
-//                        ip_binary += eight_binary[ip[j]-1];
-//                    }
-//                    cout << ip_binary << endl;
-//
-//                    //Split the result into two 32 bit binary
-//                    left_binary = ip_binary.substr(0,32);
-//                    right_binary = ip_binary.substr(32,eight_binary.length()-1);
-//
-//                    cout << left_binary << ' ' << right_binary << endl;
-//
-//                    ip_binary.clear();
-//                    eight_binary.clear();
-//
-//                }
-//            }
-//        }
-//    }
-//    else if (mode == 2)
-//    {
-//        vector<char> split_key(read.begin(),read.end());
-//
-//
-//        for (vector<char>::const_iterator i = split_key.begin(); i != split_key.end(); ++i)
-//        {
-//            // A int count variable to track the count of characters
-//            count++;
-//
-//            //Converts each character into ASCII value
-//            ascii = int(*i);
-//
-//            //Convert ASCI value to eight bit binary.
-//            binary = bitset<8>(ascii).to_string();
-//
-//
-//            if ((count % 8) != 0)
-//            {
-//                //Concatenate eight characters to make 64 bit (1 char = 8 bit)
-//                eight_binary += binary;
-//                //Concatenate until 8th character.
-//
-//            }
-//        }
-//        cout << "56 bit key: " << eight_binary << endl;
-//
-//        //Split the key into two 32 bit binary
-//        left_key_binary = eight_binary.substr(0,28);
-//        right_key_binary = eight_binary.substr(28,eight_binary.length()-1);
-//
-//        cout << left_key_binary << ' ' << right_key_binary << endl;
-//
-//        int shifted = stoi(left_key_binary) << 1;
-//
-//        //cout << "left shift: " << shifted << endl;
-//
-//    }
-//}
-
+//Permutation one two
 string key_perm_two(string joined_key )
 {
     string perm_two_binary;
@@ -226,6 +131,7 @@ string key_perm_two(string joined_key )
     return perm_two_binary;
 }
 
+//Expansion
 string expansion(string &exp)
 {
     string change;
@@ -256,21 +162,71 @@ string expansion(string &exp)
     return exp;
 }
 
-//string encrypt(string left, string right)
-//{
-//    expansion(right);
-//}
+//XOR operation
+string xor_operation(string string1, string string2)
+{
+    return ((bitset<48>(string1) ^ bitset<48>(string2)).to_string());
+}
 
-//int main(){
-//
-//
-//    string bin = "11110000101010101111000010101010";
-//    cout << bin << endl;
-//    expansion(bin);
-//    cout << endl;
-//    cout << bin << endl; //string passed in expansion function
-//    return 0;
-//}
+//Permuted 32 bit table after S box operation.
+string perm_32(string sbox_result)
+{
+    string p32_result;
+    for (int k = 0; k < p32.size() ; k++)
+    {
+        p32_result += sbox_result[p32[k]-1];
+    }
+    return p32_result;
+}
+
+string keygen(string binary_key, int round)
+{
+    //Permutation one on the 64 bit key to get 56 bit.
+    string perm_one_binary = key_perm_one(binary_key);
+
+    //Split the 56 bit key into two 28 bit binary
+    string left_key_binary = perm_one_binary.substr(0,28);
+    string right_key_binary = perm_one_binary.substr(28,perm_one_binary.length()-1);
+
+    int noshift;
+    if ( round == 1 || round == 2 )
+    {
+        noshift = 1;
+    }
+    else
+    {
+        noshift = 2;
+    }
+
+    while(noshift > 0)
+    {
+        int temp;
+        temp = left_key_binary[0];
+        for (int i = 0 ; i < 28 ; i++ )
+        {
+            left_key_binary[i] = left_key_binary[i+1];
+        }
+        left_key_binary[27] = temp;
+
+        temp = right_key_binary[0];
+        for (int i = 0 ; i < 28 ; i++)
+        {
+            right_key_binary[i] = right_key_binary[i+1];
+
+        }
+        right_key_binary[27] = temp;
+        noshift--;
+    }
+
+    //Join the shifted keys together.
+    string joined_key = left_key_binary + right_key_binary;
+
+    // Permutation two in the joined 56 bit key to get 48 bit.
+    string perm_two_binary = key_perm_two(joined_key);
+
+    return perm_two_binary;
+
+}
 
 int main()
 {
@@ -296,28 +252,6 @@ int main()
     padread = padtext(read);
     binary_done = str_bin(padread);
 
-    padkey = padtext(key);
-    binary_key = str_bin(padkey);
-
-    //Permutation one on the 64 bit key to get 56 bit.
-    string perm_one_binary = key_perm_one(binary_key);
-
-    //Split the 56 bit key into two 28 bit binary
-    string left_key_binary = perm_one_binary.substr(0,28);
-    string right_key_binary = perm_one_binary.substr(28,perm_one_binary.length()-1);
-
-    //Shift left each 28 bit key
-    string shift_left_lbinary = (bitset<28>(left_key_binary) <<  1).to_string();
-    string shift_left_rbinary = (bitset<28>(right_key_binary) << 1).to_string();
-
-    //Join the shifted keys together.
-    string joined_key = shift_left_lbinary + shift_left_rbinary;
-
-    // Permutation two in the joined 56 bit key to get 48 bit.
-    string perm_two_binary = key_perm_two(joined_key);
-
-    cout << perm_two_binary << endl;
-
     string permuted_string;
     string left_binary;
     string right_binary;
@@ -332,6 +266,19 @@ int main()
         permuted_vector.push_back(permuted_string);
     }
 
+    padkey = padtext(key);
+    binary_key = str_bin(padkey);
+
+    string final_key = keygen(binary_key, 1);
+
+    cout << final_key << endl;
+
+//    // 8 rounds of encryption has different key scheduling.
+//    for (int i = 0 ; i < left_shift_schedule.size() ; i++)
+//    {
+//
+//    }
+
     for (int i = 0; i < permuted_vector.size() ; i++)
     {
         //Split the vector into two 32 bit binary
@@ -341,11 +288,16 @@ int main()
         left_permuted_vector.push_back(left_binary);
         right_permuted_vector.push_back(right_binary);
 
-        cout << left_binary << " " << right_binary<< endl;
-
+        //Stores the expanded 48 bit here.
         string expanded = expansion(right_binary);
 
+        //Calls the xor operation on expanded bit and permuted two key.
+        string xor_result = xor_operation(expanded, final_key);
+
         cout << expanded << endl;
+
+        cout << endl;
+        cout << xor_result << endl;
 
 
 //        if (i == 0)
@@ -359,16 +311,6 @@ int main()
 //        }
 
     }
-
-//    cout << binary_done << endl;
-//    tempfunction(padread, mode);
-//
-//    mode = 2;
-
-//    cout << "pad key: " << endl;
-//    cout << padkey << endl;
-//
-//    tempfunction(padkey, mode);
 
     return 0;
 }
