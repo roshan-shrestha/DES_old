@@ -56,7 +56,7 @@ string padtext(string read)
     return read;
 }
 
-string str_bin(string read)
+string str_to_bin(string read)
 {
     int count = 0;
     int ascii;
@@ -274,11 +274,10 @@ string expansion(string &exp)
 
 int main()
 {
-    string read, write, key;
-
+    string read, write, key_text;
     string padread, padkey;
     string binary_plaintext;
-    string binary_key;
+    string key;
 
     ifstream in_file("input.txt");
     ifstream key_file("key_file.txt");
@@ -287,31 +286,24 @@ int main()
     getline(in_file, read);
     cout << read << endl;
 
-    getline(key_file, key);
-    cout << "This is the key: " << key << endl;
+    getline(key_file, key_text);
+    cout << "This is the key: " << key_text << endl;
 
 //    write = "This file was created inside a C++ program.";
 //    out_file << write << endl;
 
     padread = padtext(read);
-    binary_plaintext = str_bin(padread);
+    binary_plaintext = str_to_bin(padread);
 
-    padkey = padtext(key);
-    binary_key = str_bin(padkey);
+    key_text = padtext(key_text);
+    key = str_to_bin(key_text);
 
     //Permutation one on the 64 bit key to get 56 bit.
-    string perm_one_binary = key_perm_one(binary_key);
+    string key_p1 = key_perm_one(key);
 
     //Split the 56 bit key into two 28 bit binary
-    string left_key_binary = perm_one_binary.substr(0,28);
-    string right_key_binary = perm_one_binary.substr(28,perm_one_binary.length()-1);
-
-    //Shift left each 28 bit key
-    string shift_left_lbinary = (bitset<28>(left_key_binary) <<  1).to_string();
-    string shift_left_rbinary = (bitset<28>(right_key_binary) << 1).to_string();
-
-    //Join the shifted keys together.
-    string joined_key = shift_left_lbinary + shift_left_rbinary;
+    string key_left = key_p1.substr(0,28);
+    string key_right = key_p1.substr(28,key_p1.length()-1);
 
     // Permutation two in the joined 56 bit key to get 48 bit.
     string perm_two_binary = key_perm_two(joined_key);
@@ -319,14 +311,14 @@ int main()
     cout << perm_two_binary << endl;
 
     string permuted_string;
-    string left_binary;
-    string right_binary;
+    string left_binary_plaintext;
+    string right_binary_plaintext;
     vector <string> permuted_vector;
     vector <string> left_permuted_vector;
     vector <string> right_permuted_vector;
     vector <string> result;
 
-    // Divides and permutates the binary of
+    // Divides in size of 64 bits and permutates the binary of plaintext
     for (int i = 0; i < binary_plaintext.length() ; i+=64)
     {
         permuted_string = perm(binary_plaintext.substr(i,64));
@@ -336,15 +328,15 @@ int main()
     for (int i = 0; i < permuted_vector.size() ; i++)
     {
         //Split the vector into two 32 bit binary
-        left_binary = permuted_vector[i].substr(0,32);
-        right_binary = permuted_vector[i].substr(32,32);
+        left_binary_plaintext = permuted_vector[i].substr(0,32);
+        right_binary_plaintext = permuted_vector[i].substr(32,32);
 
-        left_permuted_vector.push_back(left_binary);
-        right_permuted_vector.push_back(right_binary);
+        left_permuted_vector.push_back(left_binary_plaintext);
+        right_permuted_vector.push_back(right_binary_plaintext);
 
-        cout << left_binary << " " << right_binary<< endl;
+        cout << left_binary_plaintext << "yo " << right_binary_plaintext<< endl;
 
-        string expanded = expansion(right_binary);
+        string expanded = expansion(right_binary_plaintext);
 
         cout << expanded << endl;
 
