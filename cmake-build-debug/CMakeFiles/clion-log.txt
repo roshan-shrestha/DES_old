@@ -1,6 +1,6 @@
-/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/Roshan/github/DES
--- The C compiler identification is AppleClang 8.1.0.8020042
--- The CXX compiler identification is AppleClang 8.1.0.8020042
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/Bishal/Desktop/project/DES
+-- The C compiler identification is AppleClang 8.0.0.8000042
+-- The CXX compiler identification is AppleClang 8.0.0.8000042
 -- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc
 -- Check for working C compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc -- works
 -- Detecting C compiler ABI info
@@ -13,6 +13,12 @@
 -- Detecting CXX compiler ABI info - done
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/Roshan/github/DES/cmake-build-debug
+CMake Error at CMakeLists.txt:9 (add_executable):
+  add_executable cannot create target "DES" because another target with the
+  same name already exists.  The existing target is an executable created in
+  source directory "/Users/Bishal/Desktop/project/DES".  See documentation
+  for policy CMP0002 for more details.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/Users/Bishal/Desktop/project/DES/cmake-build-debug/CMakeFiles/CMakeOutput.log".
