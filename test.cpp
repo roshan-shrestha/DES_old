@@ -383,8 +383,6 @@ int main()
     getline(key_file, key);
     cout << "This is the key: " << key << endl;
 
-//    write = "This file was created inside a C++ program.";
-
     string padread = padtext(read);
     string binary_done = str_bin(padread);
 
@@ -425,7 +423,6 @@ int main()
     for (int i = 0 ; i < 64 ; i+=8)
     {
         tempone += binToDec(stoi(lafinal.substr(i,8)));
-//        cout << tempone << endl;
     }
 
     out_file << tempone << endl;
