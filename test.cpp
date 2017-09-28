@@ -405,6 +405,8 @@ int main()
     string encrypt_result;
     string final;
     string temp;
+    string lafinal;
+    string tempone;
 
     for (int i = 1 ; i <= 8 ; i++)
     {
@@ -412,19 +414,16 @@ int main()
         temp = xor_operation_32(encrypt_result, left_binary);
         left_binary = right_binary;
         right_binary = temp;
+        final = left_binary + right_binary;
+        lafinal = inverse_perm(final);
+
+        for (int i = 0 ; i < 64 ; i+=8)
+        {
+            tempone += binToDec(stoi(lafinal.substr(i,8)));
+        }
     }
 
-    final = left_binary + right_binary;
-
-    string lafinal = inverse_perm(final);
-
-    string tempone;
-
-    for (int i = 0 ; i < 64 ; i+=8)
-    {
-        tempone += binToDec(stoi(lafinal.substr(i,8)));
-    }
-
+    cout << tempone << endl;
     out_file << tempone << endl;
 
     return 0;
