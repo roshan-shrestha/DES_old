@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="DES" targetName="DES" />
       <config projectName="DES" targetName="TEST" />
+      <config projectName="DES" targetName="DES" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -14,10 +14,6 @@
   <component name="ChangeListManager">
     <list default="true" id="061e7e32-fda9-40a8-a2ee-125f350e8fe3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/input.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/input.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/key_file.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/key_file.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake-build-debug/output.txt" afterPath="$PROJECT_DIR$/cmake-build-debug/output.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.cpp" afterPath="$PROJECT_DIR$/test.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1890">
+            <state relative-caret-position="4110">
               <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -60,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2214">
-              <caret line="425" column="0" lean-forward="false" selection-start-line="425" selection-start-column="0" selection-end-line="425" selection-end-column="0" />
+            <state relative-caret-position="213">
+              <caret line="414" column="5" lean-forward="true" selection-start-line="414" selection-start-column="5" selection-end-line="414" selection-end-column="5" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#4764#5016#0" expanded="false" />
@@ -89,7 +85,7 @@
       <file leaf-file-name="scratch.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2255">
+            <state relative-caret-position="501">
               <caret line="355" column="4" lean-forward="false" selection-start-line="355" selection-start-column="4" selection-end-line="356" selection-end-column="84" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -244,7 +240,8 @@
       <workItem from="1506229861084" duration="2221000" />
       <workItem from="1506304330849" duration="111000" />
       <workItem from="1506384282875" duration="11800000" />
-      <workItem from="1506461725954" duration="14054000" />
+      <workItem from="1506461725954" duration="14333000" />
+      <workItem from="1506640384363" duration="48000" />
     </task>
     <task id="LOCAL-00001" summary="brand new func">
       <created>1506201115000</created>
@@ -295,11 +292,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506483487715</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update bits">
+      <created>1506483682164</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1506483682164</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41222000" />
+    <option name="totallyTimeSpent" value="41549000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -342,7 +346,8 @@
     <MESSAGE value="updated the key;&#10;we have the first key;" />
     <MESSAGE value="key gen" />
     <MESSAGE value="test file 8 bit" />
-    <option name="LAST_COMMIT_MESSAGE" value="test file 8 bit" />
+    <MESSAGE value="update bits" />
+    <option name="LAST_COMMIT_MESSAGE" value="update bits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -753,7 +758,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -761,7 +765,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -769,13 +772,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4110">
+          <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#1856#2108#0" expanded="false" />
+            <element signature="e#2110#3009#0" expanded="false" />
+            <element signature="e#3011#3249#0" expanded="false" />
+            <element signature="e#3251#3501#0" expanded="false" />
+            <element signature="e#3503#3753#0" expanded="false" />
+            <element signature="e#3755#4232#0" expanded="false" />
+            <element signature="e#4234#4376#0" expanded="false" />
+            <element signature="e#4378#4608#0" expanded="false" />
+            <element signature="e#4610#5789#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2255">
+        <state relative-caret-position="501">
           <caret line="355" column="4" lean-forward="false" selection-start-line="355" selection-start-column="4" selection-end-line="356" selection-end-column="84" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
@@ -796,8 +817,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2214">
-          <caret line="425" column="0" lean-forward="false" selection-start-line="425" selection-start-column="0" selection-end-line="425" selection-end-column="0" />
+        <state relative-caret-position="213">
+          <caret line="414" column="5" lean-forward="true" selection-start-line="414" selection-start-column="5" selection-end-line="414" selection-end-column="5" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#4764#5016#0" expanded="false" />
@@ -814,25 +835,6 @@
             <element signature="e#9079#9264#0" expanded="false" />
             <element signature="e#9266#9648#0" expanded="false" />
             <element signature="e#9651#10132#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="274" column="0" lean-forward="false" selection-start-line="274" selection-start-column="0" selection-end-line="274" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <element signature="e#1856#2108#0" expanded="false" />
-            <element signature="e#2110#3009#0" expanded="false" />
-            <element signature="e#3011#3249#0" expanded="false" />
-            <element signature="e#3251#3501#0" expanded="false" />
-            <element signature="e#3503#3753#0" expanded="false" />
-            <element signature="e#3755#4232#0" expanded="false" />
-            <element signature="e#4234#4376#0" expanded="false" />
-            <element signature="e#4378#4608#0" expanded="false" />
-            <element signature="e#4610#5789#0" expanded="false" />
           </folding>
         </state>
       </provider>
