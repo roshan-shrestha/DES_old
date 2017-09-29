@@ -263,15 +263,8 @@ string perm_32(string sbox_result)
 }
 
 
-string keygen(string binary_key, int round)
+string keygen(string left_key_binary, string right_key_binary, int round)
 {
-    //Permutation one on the 64 bit key to get 56 bit.
-    string perm_one_binary = key_perm_one(binary_key);
-
-    //Split the 56 bit key into two 28 bit binary
-    string left_key_binary = perm_one_binary.substr(0,28);
-    string right_key_binary = perm_one_binary.substr(28,perm_one_binary.length()-1);
-
     int noshift;
     if ( round == 1 || round == 2 )
     {
@@ -305,10 +298,7 @@ string keygen(string binary_key, int round)
     //Join the shifted keys together.
     string joined_key = left_key_binary + right_key_binary;
 
-    // Permutation two in the joined 56 bit key to get 48 bit.
-    string perm_two_binary = key_perm_two(joined_key);
-
-    return perm_two_binary;
+    return joined_key;
 
 }
 
@@ -346,12 +336,9 @@ string sbox(string bin, int boxnum)
 
 string encrypt(string input, string key, int i)
 {
-
     string result_expansion = expansion(input);
 
-    string result_key = keygen(key,i);
-
-    string result_xor = xor_operation_48(result_key, result_expansion);
+    string result_xor = xor_operation_48(key, result_expansion);
 
     string result_sbox, temp;
 
@@ -391,40 +378,61 @@ int main()
     string padkey = padtext(key);
     string binary_key = str_bin(padkey);
 
-    string result_ip = initial_perm(binary_key);
-
-    //Split the vector into two 32 bit binary
-    string left_binary = result_ip.substr(0,32);
-    string right_binary = result_ip.substr(32,32);
-
-    for (int i = 0; i < binary_done.length() ; i += 64)
-    {
-        permuted_vector.push_back(binary_done.substr( i , 64 ));
-    }
-
+    string result_ip;
     string encrypt_result;
     string final;
     string temp;
     string lafinal;
     string tempone;
 
-    for (int i = 1 ; i <= 8 ; i++)
-    {
-        encrypt_result = encrypt(right_binary, binary_key, i);
-        temp = xor_operation_32(encrypt_result, left_binary);
-        left_binary = right_binary;
-        right_binary = temp;
-        final = left_binary + right_binary;
-        lafinal = inverse_perm(final);
+    //Permutation one on the 64 bit key to get 56 bit.
+    string perm_one_binary = key_perm_one(binary_key);
 
-        for (int i = 0 ; i < 64 ; i+=8)
+    //Split the 56 bit key into two 28 bit binary
+    string left_key_binary = perm_one_binary.substr(0,28);
+    string right_key_binary = perm_one_binary.substr(28,perm_one_binary.length()-1);
+
+    int count = 0;
+    for (int i = 0; i < binary_done.length() ; i += 64)
+    {
+        permuted_vector.push_back(binary_done.substr( i , 64 ));
+        result_ip = initial_perm(permuted_vector[count]);
+        count++;
+
+        //Split the vector into two 32 bit binary
+        string left_binary = result_ip.substr(0,32);
+        string right_binary = result_ip.substr(32,result_ip.length() - 1);
+
+        for (int i = 1 ; i <= 8 ; i++)
         {
-            tempone += binToDec(stoi(lafinal.substr(i,8)));
+            string result_key = keygen(left_key_binary, right_key_binary, i);
+
+            string left_shifted_key = result_key.substr(0,28);
+            string right_shifted_key = result_key.substr(28,result_key.length() - 1);
+
+            // Permutation two in the joined 56 bit key to get 48 bit.
+            string perm_two_binary = key_perm_two(result_key);
+
+            encrypt_result = encrypt(right_binary, perm_two_binary, i);
+
+            temp = xor_operation_32(encrypt_result, left_binary);
+
+            left_binary = right_binary;
+            right_binary = temp;
+        }
+
+        final = left_binary + right_binary;
+        string tempfinal = inverse_perm(final);
+
+        lafinal += tempfinal;
+
+        //cout << lafinal << endl;
+        for (int i = 0 ; i < lafinal.length() ; i+=8 )
+        {
+            int n = (bitset<8>(lafinal.substr(i,8))).to_ulong();
+            char c = (char)n;
         }
     }
-
-    cout << tempone << endl;
-    out_file << tempone << endl;
 
     return 0;
 }
