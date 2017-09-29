@@ -106,11 +106,13 @@ short sbox_array[8][4][16] =
                 }
         };
 
-static vector<int> e_table = {32, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 8, 9, 10, 11, 12, 13, 12, 13, 14, 15, 16, 17,
-16, 17, 18, 19, 20, 21,
-20, 21, 22, 23, 24, 25,
-24, 25, 26, 27, 28, 29,
-28, 29, 30, 31, 32, 1};
+static vector<int> e_table = {32, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8,
+                              9, 8, 9, 10, 11, 12, 13, 12, 13, 14,
+                              15, 16, 17, 16, 17, 18, 19, 20, 21, 20,
+                              21, 22, 23, 24, 25, 24, 25, 26, 27, 28,
+                              29, 28, 29, 30, 31, 32, 1};
+
+vector <string> keys_vector;
 
 string padtext(string read)
 {
@@ -262,8 +264,7 @@ string perm_32(string sbox_result)
     return p32_result;
 }
 
-
-string keygen(string left_key_binary, string right_key_binary, int round)
+string keygen(string &left_key_binary, string &right_key_binary, int round)
 {
     int noshift;
     if ( round == 1 || round == 2 )
@@ -277,21 +278,22 @@ string keygen(string left_key_binary, string right_key_binary, int round)
 
     while(noshift > 0)
     {
-        int temp;
-        temp = left_key_binary[0];
+        int temp1;
+        int temp2;
+        temp1 = left_key_binary[0];
         for (int i = 0 ; i < 28 ; i++ )
         {
             left_key_binary[i] = left_key_binary[i+1];
         }
-        left_key_binary[27] = temp;
+        left_key_binary[27] = temp1;
 
-        temp = right_key_binary[0];
+        temp2 = right_key_binary[0];
         for (int i = 0 ; i < 28 ; i++)
         {
             right_key_binary[i] = right_key_binary[i+1];
 
         }
-        right_key_binary[27] = temp;
+        right_key_binary[27] = temp2;
         noshift--;
     }
 
@@ -299,7 +301,6 @@ string keygen(string left_key_binary, string right_key_binary, int round)
     string joined_key = left_key_binary + right_key_binary;
 
     return joined_key;
-
 }
 
 int binToDec(int n)
@@ -333,7 +334,6 @@ string sbox(string bin, int boxnum)
     return (bitset<4>(sbox_array[boxnum][row_num][column_num])).to_string();
 }
 
-
 string encrypt(string input, string key, int i)
 {
     string result_expansion = expansion(input);
@@ -356,28 +356,24 @@ string encrypt(string input, string key, int i)
     return last_perm;
 }
 
-int main()
+void write_output(string lafinal)
 {
-    string read, write, key;
 
-    ifstream in_file("input.txt");
-    ifstream key_file("key_file.txt");
     ofstream out_file("output.txt");
 
-    getline(in_file, read);
-    cout << read << endl;
+    cout << "Encrypted plain text: ";
+    for (int i = 0 ; i < lafinal.length() ; i += 8 )
+    {
+        int n = (bitset<8>(lafinal.substr(i,8))).to_ulong();
+        char c = (char)n;
+        cout << c;
+        out_file << c;
+    }
+    cout << endl;
+}
 
-    getline(key_file, key);
-    cout << "This is the key: " << key << endl;
-
-    string padread = padtext(read);
-    string binary_done = str_bin(padread);
-
-    vector <string> permuted_vector;
-
-    string padkey = padtext(key);
-    string binary_key = str_bin(padkey);
-
+string all_encrypt(string binary_done, string &left_key_binary, string &right_key_binary)
+{
     string result_ip;
     string encrypt_result;
     string final;
@@ -385,19 +381,17 @@ int main()
     string lafinal;
     string tempone;
 
-    //Permutation one on the 64 bit key to get 56 bit.
-    string perm_one_binary = key_perm_one(binary_key);
-
-    //Split the 56 bit key into two 28 bit binary
-    string left_key_binary = perm_one_binary.substr(0,28);
-    string right_key_binary = perm_one_binary.substr(28,perm_one_binary.length()-1);
+    vector <string> permuted_vector;
 
     int count = 0;
     for (int i = 0; i < binary_done.length() ; i += 64)
     {
-        permuted_vector.push_back(binary_done.substr( i , 64 ));
+        permuted_vector.push_back(binary_done.substr(i, 64));
+    }
+
+    for (int count = 0; count <permuted_vector.size() ; count++)
+    {
         result_ip = initial_perm(permuted_vector[count]);
-        count++;
 
         //Split the vector into two 32 bit binary
         string left_binary = result_ip.substr(0,32);
@@ -406,6 +400,8 @@ int main()
         for (int i = 1 ; i <= 8 ; i++)
         {
             string result_key = keygen(left_key_binary, right_key_binary, i);
+
+            keys_vector.push_back(result_key);
 
             string left_shifted_key = result_key.substr(0,28);
             string right_shifted_key = result_key.substr(28,result_key.length() - 1);
@@ -425,13 +421,111 @@ int main()
         string tempfinal = inverse_perm(final);
 
         lafinal += tempfinal;
+    }
+    return lafinal;
+}
 
-        //cout << lafinal << endl;
-        for (int i = 0 ; i < lafinal.length() ; i+=8 )
+
+int main()
+{
+    string read, write, key;
+
+    ifstream in_file("input.txt");
+    ifstream key_file("key_file.txt");
+
+    getline(in_file, read);
+    cout << read << endl;
+
+    getline(key_file, key);
+    cout << "This is the key: " << key << endl;
+
+    string padread = padtext(read);
+    string binary_done = str_bin(padread);
+
+    string binary_key = str_bin(key);
+
+    //Permutation one on the 64 bit key to get 56 bit.
+    string perm_one_binary = key_perm_one(binary_key);
+
+    //Split the 56 bit key into two 28 bit binary
+    string left_key_binary = perm_one_binary.substr(0,28);
+    string right_key_binary = perm_one_binary.substr(28,perm_one_binary.length()-1);
+
+    string lafinal = all_encrypt(binary_done, left_key_binary, right_key_binary);
+
+    // Write the output in a out_put file
+    write_output(lafinal);
+
+    // Decryption
+    ifstream decrypt_in_file("output.txt");
+    ifstream decrypt_key_file("key_file.txt");
+    ofstream decrypt_out_file("decrypted_output.txt");
+
+    string decrypt_read;
+
+    getline(decrypt_in_file, decrypt_read);
+
+    string decrypted_binary_read = str_bin(decrypt_read);
+
+    vector<string> decrypt_permuted_vector;
+
+    string decrypt_result_ip;
+    string decrypt_encrypt_result;
+    string decrypt_temp;
+    string decrypt_final;
+    string decrypt_lafinal;
+    string decrypt_tempfinal;
+    string decrypt_left_shifted_key;
+    string decrypt_right_shifted_key;
+
+    reverse(keys_vector.begin(),keys_vector.end());
+
+    int count = 0;
+
+    for (int i = 0; i < decrypted_binary_read.length() ; i += 64) {
+        decrypt_permuted_vector.push_back(binary_done.substr(i, 64));
+    }
+
+    for (int j = 0; j < decrypt_permuted_vector.size() ; j++)
+    {
+        decrypt_result_ip = initial_perm(decrypt_permuted_vector[j]);
+
+        //Split the vector into two 32 bit binary
+        string left_binary = decrypt_result_ip.substr(0,32);
+        string right_binary = decrypt_result_ip.substr(32,decrypt_result_ip.length() - 1);
+
+        for (int i = 1 ; i <= 8 ; i++)
         {
-            int n = (bitset<8>(lafinal.substr(i,8))).to_ulong();
-            char c = (char)n;
+
+            string result_key = keys_vector[count];
+
+            //string result_key = keygen(left_key_binary, right_key_binary, i);
+            decrypt_left_shifted_key = result_key.substr(0,28);
+            decrypt_right_shifted_key = result_key.substr(28,result_key.length() - 1);
+
+            // Permutation two in the joined 56 bit key to get 48 bit.
+            string perm_two_binary = key_perm_two(result_key);
+
+            decrypt_encrypt_result = encrypt(right_binary, perm_two_binary, i);
+
+            decrypt_temp = xor_operation_32(decrypt_encrypt_result, left_binary);
+
+            count++;
         }
+        count = 0;
+
+        decrypt_final = left_binary + right_binary;
+        decrypt_tempfinal = inverse_perm(decrypt_final);
+
+        decrypt_lafinal += decrypt_tempfinal;
+    }
+
+    cout << "Decrypted cipher text: ";
+    for (int i = 0 ; i < decrypt_lafinal.length() ; i += 8 )
+    {
+        int n = (bitset<8>(decrypt_lafinal.substr(i,8))).to_ulong();
+        char c = (char)n;
+        cout << c;
     }
 
     return 0;
